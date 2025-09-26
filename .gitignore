@@ -1,0 +1,19 @@
+# .NET build
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# TOML config (do not commit secrets)
+appsettings.toml
+
+# Logs
+*.log
+
+# AWS credentials
+.aws/

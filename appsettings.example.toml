@@ -1,0 +1,12 @@
+# Example TOML config for Makino YouTubeDL Microservice
+
+[youtubeDL]
+# Path to youtube-dl or yt-dlp binary
+path = "/usr/local/bin/youtube-dl"
+
+[s3]
+# AWS credentials and bucket info
+access_key = "YOUR_AWS_ACCESS_KEY"
+secret_key = "YOUR_AWS_SECRET_KEY"
+region = "us-east-1"
+bucket = "your-s3-bucket-name"
