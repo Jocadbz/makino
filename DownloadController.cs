@@ -36,13 +36,26 @@ public class DownloadController : ControllerBase
                 string? filePath = files.Length > 0 ? files[0] : null;
                 if (filePath != null)
                 {
-                    var s3Url = await S3Helper.UploadFileAsync(filePath, _config.S3);
-                    return Ok(new DownloadResponse
+                    // S3 upload is optional: only if bucket is set
+                    if (!string.IsNullOrWhiteSpace(_config.S3.Bucket))
                     {
-                        StatusCode = 0,
-                        Message = "Download and upload successful.",
-                        FilePath = s3Url
-                    });
+                        var s3Url = await S3Helper.UploadFileAsync(filePath, _config.S3);
+                        return Ok(new DownloadResponse
+                        {
+                            StatusCode = 0,
+                            Message = "Download and upload successful.",
+                            FilePath = s3Url
+                        });
+                    }
+                    else
+                    {
+                        return Ok(new DownloadResponse
+                        {
+                            StatusCode = 0,
+                            Message = "Download successful (local only).",
+                            FilePath = filePath
+                        });
+                    }
                 }
                 else
                 {
