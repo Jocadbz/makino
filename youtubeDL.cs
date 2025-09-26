@@ -23,8 +23,9 @@ public class youtubeDL
         if (!Directory.Exists(outputDirectory))
             Directory.CreateDirectory(outputDirectory);
 
-        var formatArg = string.IsNullOrWhiteSpace(format) ? "" : $"-f {format} ";
-        var outputTemplate = Path.Combine(outputDirectory, "%(title)s.%(ext)s");
+            var formatArg = string.IsNullOrWhiteSpace(format) ? "" : $"-f {format} ";
+            var random = Guid.NewGuid().ToString("N");
+            var outputTemplate = Path.Combine(outputDirectory, $"%(title)s_{random}.%(ext)s");
         var arguments = $"{formatArg}-o \"{outputTemplate}\" {url}";
         var processInfo = new ProcessStartInfo
         {
@@ -51,8 +52,9 @@ public class youtubeDL
         if (!Directory.Exists(outputDirectory))
             Directory.CreateDirectory(outputDirectory);
 
-        var formatArg = string.IsNullOrWhiteSpace(format) ? "" : $"-f {format} ";
-        var outputTemplate = Path.Combine(outputDirectory, "%(playlist)s/%(title)s.%(ext)s");
+            var formatArg = string.IsNullOrWhiteSpace(format) ? "" : $"-f {format} ";
+            var random = Guid.NewGuid().ToString("N");
+            var outputTemplate = Path.Combine(outputDirectory, $"%(playlist)s/%(title)s_{random}.%(ext)s");
         var arguments = $"{formatArg}-o \"{outputTemplate}\" {playlistUrl}";
         var processInfo = new ProcessStartInfo
         {
@@ -79,8 +81,9 @@ public class youtubeDL
         if (!Directory.Exists(outputDirectory))
             Directory.CreateDirectory(outputDirectory);
 
-        var formatArg = string.IsNullOrWhiteSpace(format) ? "" : $"-f {format} ";
-        var outputTemplate = Path.Combine(outputDirectory, "%(title)s.%(ext)s");
+            var formatArg = string.IsNullOrWhiteSpace(format) ? "" : $"-f {format} ";
+            var random = Guid.NewGuid().ToString("N");
+            var outputTemplate = Path.Combine(outputDirectory, $"%(title)s_{random}.%(ext)s");
         var arguments = $"{formatArg}-o \"{outputTemplate}\" {url}";
         var processInfo = new ProcessStartInfo
         {
@@ -107,8 +110,9 @@ public class youtubeDL
         if (!Directory.Exists(outputDirectory))
             Directory.CreateDirectory(outputDirectory);
 
-        var formatArg = string.IsNullOrWhiteSpace(format) ? "" : $"-f {format} ";
-        var outputTemplate = Path.Combine(outputDirectory, "%(playlist)s/%(title)s.%(ext)s");
+            var formatArg = string.IsNullOrWhiteSpace(format) ? "" : $"-f {format} ";
+            var random = Guid.NewGuid().ToString("N");
+            var outputTemplate = Path.Combine(outputDirectory, $"%(playlist)s/%(title)s_{random}.%(ext)s");
         var arguments = $"{formatArg}-o \"{outputTemplate}\" {playlistUrl}";
         var processInfo = new ProcessStartInfo
         {
