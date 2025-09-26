@@ -2,13 +2,6 @@
 
 A scalable ASP.NET Core microservice for downloading YouTube videos and playlists, then uploading them to Amazon S3 for infinite storage. Configuration is managed via a simple TOML file.
 
-## Features
-- Download YouTube videos or playlists using youtube-dl
-- Upload results to Amazon S3
-- Asynchronous, scalable API (handles hundreds of requests)
-- Configuration via `appsettings.toml` (S3 credentials, youtube-dl path)
-- Returns S3 URL for downloaded content
-
 ## Setup
 1. **Clone the repo**
 2. **Install dependencies:**
@@ -56,6 +49,7 @@ POST `/api/download`
 ## Security
 - Never commit `appsettings.toml` with real credentials.
 - Use IAM roles and policies for S3 access.
+- Don't be an idiot.
 
 ## License
 MIT
