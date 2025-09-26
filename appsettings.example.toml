@@ -4,6 +4,11 @@
 # Path to youtube-dl or yt-dlp binary
 path = "/usr/local/bin/youtube-dl"
 
+# Cleanup config
+[cleanup]
+# Time in minutes before deleting downloaded videos (set to 0 to disable)
+delete_after_minutes = 60
+
 [s3]
 # AWS credentials and bucket info
 access_key = "YOUR_AWS_ACCESS_KEY"

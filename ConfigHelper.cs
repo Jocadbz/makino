@@ -7,6 +7,12 @@ public class AppConfig
 {
     public YoutubeDLConfig YoutubeDL { get; set; } = new();
     public S3Config S3 { get; set; } = new();
+    public CleanupConfig Cleanup { get; set; } = new();
+}
+
+public class CleanupConfig
+{
+    public int DeleteAfterMinutes { get; set; } = 0;
 }
 
 public class YoutubeDLConfig
@@ -41,6 +47,13 @@ public static class ConfigHelper
                 config.S3.SecretKey = s3["secret_key"]?.ToString() ?? "";
                 config.S3.Region = s3["region"]?.ToString() ?? "";
                 config.S3.Bucket = s3["bucket"]?.ToString() ?? "";
+            }
+
+            var cleanup = model["cleanup"] as TomlTable;
+            if (cleanup != null)
+            {
+                if (int.TryParse(cleanup["delete_after_minutes"]?.ToString(), out int minutes))
+                    config.Cleanup.DeleteAfterMinutes = minutes;
             }
         }
         return config;

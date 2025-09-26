@@ -14,6 +14,24 @@ public class DownloadController : ControllerBase
         _youtubeDL = new youtubeDL(_config.YoutubeDL.Path);
     }
 
+    private void ScheduleFileDeletion(string filePath)
+    {
+        int minutes = _config.Cleanup.DeleteAfterMinutes;
+        if (minutes > 0)
+        {
+            Task.Run(async () =>
+            {
+                await Task.Delay(TimeSpan.FromMinutes(minutes));
+                try
+                {
+                    if (System.IO.File.Exists(filePath))
+                        System.IO.File.Delete(filePath);
+                }
+                catch { /* ignore errors */ }
+            });
+        }
+    }
+
     [HttpPost]
     public async Task<ActionResult<DownloadResponse>> Download([FromBody] DownloadRequest request)
     {
@@ -36,7 +54,7 @@ public class DownloadController : ControllerBase
                 string? filePath = files.Length > 0 ? files[0] : null;
                 if (filePath != null)
                 {
-                    // S3 upload is optional: only if bucket is set
+                    ScheduleFileDeletion(filePath);
                     if (!string.IsNullOrWhiteSpace(_config.S3.Bucket))
                     {
                         var s3Url = await S3Helper.UploadFileAsync(filePath, _config.S3);
